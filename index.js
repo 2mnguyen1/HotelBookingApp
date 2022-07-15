@@ -1,7 +1,27 @@
 import express from "express";
-const app = express();
+import dotenv from "dotenv";
+import mongoose from "mongoose";
 
-app.listen(8800, () => {
-  console.log("Connected to 8800 port");
+const app = express();
+dotenv.config();
+
+const connect = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URL);
+    console.log("connected to mongoDB");
+  } catch (error) {
+    throw error;
+  }
+};
+
+mongoose.connection.on("disconnected", () => {
+  console.log("mongoDB disconnected!");
+});
+mongoose.connection.on("connected", () => {
+  console.log("mongoDB connected!");
 });
 
+app.listen(8800, () => {
+  connect();
+  console.log("connected to 8800 port");
+});
