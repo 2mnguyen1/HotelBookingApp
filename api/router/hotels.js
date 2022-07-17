@@ -6,7 +6,6 @@ import {
   getHotel,
   getAllHotels,
 } from "../controllers/hotel.js";
-import { createError } from "../utils/error.js";
 const router = express.Router();
 
 // CREATE
