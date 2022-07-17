@@ -1,10 +1,10 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import authRoute from "./router/auth.js";
+// import authRoute from "./router/auth.js";
 import hotelsRoute from "./router/hotels.js";
-import roomsRoute from "./router/rooms.js";
-import usersRoute from "./router/users.js";
+// import roomsRoute from "./router/rooms.js";
+// import usersRoute from "./router/users.js";
 
 const app = express();
 dotenv.config();
@@ -26,11 +26,12 @@ mongoose.connection.on("connected", () => {
 });
 
 // middlewares
+app.use(express.json()) // to send json request
 
-app.use("/api/auth", authRoute);
+// app.use("/api/auth", authRoute);
 app.use("/api/hotels", hotelsRoute);
-app.use("/api/rooms", roomsRoute);
-app.use("/api/users", usersRoute);
+// app.use("/api/rooms", roomsRoute);
+// app.use("/api/users", usersRoute);
 
 app.listen(8800, () => {
   connect();
