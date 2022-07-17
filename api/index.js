@@ -26,13 +26,28 @@ mongoose.connection.on("connected", () => {
 });
 
 // middlewares
-app.use(express.json()) // to send json request
-
+app.use(express.json()); // to send json request
 // app.use("/api/auth", authRoute);
 app.use("/api/hotels", hotelsRoute);
 // app.use("/api/rooms", roomsRoute);
 // app.use("/api/users", usersRoute);
 
+// error handling middlewares
+app.use((err, req, res, next) => {
+  const errorStatus = err.status || 500;
+  const errorMessage = err.message || "Something went wrong!!";
+  return res.status(errorStatus).json({
+    sucess: false,
+    status: errorStatus,
+    message: errorMessage,
+    stack: err.stack,
+  });
+});
+
+// NOTE
+// a middlewares can reach any requests from users
+
+// -----------------------------
 app.listen(8800, () => {
   connect();
   console.log("connected to 8800 port");
