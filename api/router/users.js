@@ -5,7 +5,10 @@ import {
   getUser,
   getAllUsers,
 } from "../controllers/user.js";
+import { verifyToken } from "../utils/verifyToken.js";
+
 const router = express.Router();
+
 
 // UPDATE
 router.put("/:id", updateUser);
