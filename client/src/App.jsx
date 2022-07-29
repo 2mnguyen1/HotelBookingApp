@@ -10,7 +10,7 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<Home />}></Route>
                 <Route path="/hotels" element={<List />}></Route>
-                <Route path="/hotel/:id" element={<OneHotel />}></Route>
+                <Route path="/hotels/:id" element={<OneHotel />}></Route>
             </Routes>
         </BrowserRouter>
     );

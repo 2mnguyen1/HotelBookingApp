@@ -1,0 +1,41 @@
+.header {
+    background-color: #003580;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.header-container {
+    width: 100%;
+    max-width: 1024px;
+    margin: 20px 0 100px 0;
+}
+.header-lists {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-list-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-lists .active {
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 20px;
+}
+.header-discription {
+    margin: 20px 0;
+}
+.header-button {
+    background-color: #0071c2;
+    color: white;
+    border: none;
+    font-weight: 500;
+    padding: 10px;
+    cursor: pointer;
+}
