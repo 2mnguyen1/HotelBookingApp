@@ -3,6 +3,7 @@
     color: white;
     display: flex;
     justify-content: center;
+    position: relative;
 }
 
 .header-container {
@@ -38,4 +39,35 @@
     font-weight: 500;
     padding: 10px;
     cursor: pointer;
+}
+
+.header-search {
+    height: 30px;
+    background-color: white;
+    border: 3px solid yellow;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 0px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: -25px;
+    width: 100%;
+    max-width: 1024px;
+}
+.header-icon {
+    color: grey;
+}
+
+.header-search-items {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.header-search-input {
+    border: none;
+    outline: none;
+}
+.header-search-text {
+    color: grey;
 }
