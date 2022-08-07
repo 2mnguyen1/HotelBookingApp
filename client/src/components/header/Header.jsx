@@ -1,4 +1,5 @@
 import "./header.css";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faBed,
@@ -8,7 +9,25 @@ import {
     faPlane,
     faTaxi,
 } from "@fortawesome/free-solid-svg-icons";
+import { DateRange } from "react-date-range";
+import "react-date-range/dist/styles.css"; // main css file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import { format } from "date-fns";
 export default function Header() {
+    const [openDate, setOpenDate] = useState(false);
+    const [date, setDate] = useState([
+        {
+            startDate: new Date(),
+            endDate: new Date(),
+            key: "selection",
+        },
+    ]);
+    const [openOption, setOpenOption] = useState(false);
+    const [option, setOption] = useState({
+        adults: 1,
+        children: 0,
+        room: 1,
+    });
     return (
         <div className="header">
             <div className="header-container">
@@ -55,15 +74,78 @@ export default function Header() {
                         <FontAwesomeIcon
                             icon={faCalendarDay}
                             className="header-icon"
+                            onClick={() => setOpenDate((prev) => !prev)}
                         />
-                        <span className="header-search-text">date to date</span>
+                        <span
+                            className="header-search-text"
+                            onClick={() => setOpenDate((prev) => !prev)}
+                        >
+                            {format(date[0].startDate, "MM/dd/yyyy") +
+                                " to " +
+                                format(date[0].endDate, "MM/dd/yyyy")}
+                        </span>
+                        {openDate && (
+                            <DateRange
+                                editableDateInputs={true}
+                                onChange={(item) => setDate([item.selection])}
+                                moveRangeOnFirstSelection={false}
+                                ranges={date}
+                                className="date"
+                            />
+                        )}
                     </div>
                     <div className="header-search-items">
                         <FontAwesomeIcon
                             icon={faPerson}
                             className="header-icon"
                         />
-                        <span className="header-search-text">2 adults 2 children 1 room</span>
+                        <span className="header-search-text">
+                            {`${option.adults} adult ${option.children} children ${option.room} room`}
+                        </span>
+                        <div className="options">
+                            <div className="option-item">
+                                <span className="option-text">Adult</span>
+                                <div className="option-counter">
+                                    <button className="option-counter-button">
+                                        -
+                                    </button>
+                                    <span className="option-counter-number">
+                                        1
+                                    </span>
+                                    <button className="option-counter-button">
+                                        +
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="option-item">
+                                <span className="option-text">Children</span>
+                                <div className="option-counter">
+                                    <button className="option-counter-button">
+                                        -
+                                    </button>
+                                    <span className="option-counter-number">
+                                        1
+                                    </span>
+                                    <button className="option-counter-button">
+                                        +
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="option-item">
+                                <span className="option-text">Room</span>
+                                <div className="option-counter">
+                                    <button className="option-counter-button">
+                                        -
+                                    </button>
+                                    <span className="option-counter-number">
+                                        1
+                                    </span>
+                                    <button className="option-counter-button">
+                                        +
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div className="header-search-items">
                         <button className="header-button">Search</button>
