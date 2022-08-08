@@ -24,10 +24,18 @@ export default function Header() {
     ]);
     const [openOption, setOpenOption] = useState(false);
     const [option, setOption] = useState({
-        adults: 1,
+        adults: 0,
         children: 0,
-        room: 1,
+        room: 0,
     });
+    const handleOption = (name, operation) => {
+        setOption((prev) => {
+            return {
+                ...prev,
+                [name]: operation === "+" ? option[name] + 1 : option[name] - 1,
+            };
+        });
+    };
     return (
         <div className="header">
             <div className="header-container">
@@ -93,59 +101,129 @@ export default function Header() {
                                 className="date"
                             />
                         )}
+
                     </div>
                     <div className="header-search-items">
                         <FontAwesomeIcon
                             icon={faPerson}
                             className="header-icon"
+                            onClick={() => setOpenOption((prev) => !prev)}
                         />
-                        <span className="header-search-text">
+                        <span
+                            className="header-search-text"
+                            onClick={() => setOpenOption((prev) => !prev)}
+                        >
                             {`${option.adults} adult ${option.children} children ${option.room} room`}
                         </span>
-                        <div className="options">
-                            <div className="option-item">
-                                <span className="option-text">Adult</span>
-                                <div className="option-counter">
-                                    <button className="option-counter-button">
-                                        -
-                                    </button>
-                                    <span className="option-counter-number">
-                                        1
+                        {openOption && (
+                            <div className="options">
+                                <div className="option-item">
+                                    <span className="option-text">Adult</span>
+                                    <div className="option-counter">
+                                        <button
+                                            disabled={
+                                                option.adults <= 0
+                                                    ? true
+                                                    : false
+                                            }
+                                            style={{
+                                                backgroundColor:
+                                                    option.adults <= 0
+                                                        ? "lightgrey"
+                                                        : "",
+                                            }}
+                                            className="option-counter-button"
+                                            onClick={() =>
+                                                handleOption("adults", "-")
+                                            }
+                                        >
+                                            -
+                                        </button>
+                                        <span className="option-counter-number">
+                                            {option.adults}
+                                        </span>
+                                        <button
+                                            className="option-counter-button"
+                                            onClick={() =>
+                                                handleOption("adults", "+")
+                                            }
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="option-item">
+                                    <span className="option-text">
+                                        Children
                                     </span>
-                                    <button className="option-counter-button">
-                                        +
-                                    </button>
+                                    <div className="option-counter">
+                                        <button
+                                            disabled={
+                                                option.children <= 0
+                                                    ? true
+                                                    : false
+                                            }
+                                            style={{
+                                                backgroundColor:
+                                                    option.children <= 0
+                                                        ? "lightgrey"
+                                                        : "",
+                                            }}
+                                            className="option-counter-button"
+                                            onClick={() =>
+                                                handleOption("children", "-")
+                                            }
+                                        >
+                                            -
+                                        </button>
+                                        <span className="option-counter-number">
+                                            {option.children}
+                                        </span>
+                                        <button
+                                            className="option-counter-button"
+                                            onClick={() =>
+                                                handleOption("children", "+")
+                                            }
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="option-item">
+                                    <span className="option-text">Room</span>
+                                    <div className="option-counter">
+                                        <button
+                                            disabled={
+                                                option.room <= 0 ? true : false
+                                            }
+                                            style={{
+                                                backgroundColor:
+                                                    option.room <= 0
+                                                        ? "lightgrey"
+                                                        : "",
+                                            }}
+                                            className="option-counter-button"
+                                            onClick={() =>
+                                                handleOption("room", "-")
+                                            }
+                                        >
+                                            -
+                                        </button>
+                                        <span className="option-counter-number">
+                                            {option.room}
+                                        </span>
+                                        <button
+                                            className="option-counter-button"
+                                            onClick={() =>
+                                                handleOption("room", "+")
+                                            }
+                                        >
+                                            +
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="option-item">
-                                <span className="option-text">Children</span>
-                                <div className="option-counter">
-                                    <button className="option-counter-button">
-                                        -
-                                    </button>
-                                    <span className="option-counter-number">
-                                        1
-                                    </span>
-                                    <button className="option-counter-button">
-                                        +
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="option-item">
-                                <span className="option-text">Room</span>
-                                <div className="option-counter">
-                                    <button className="option-counter-button">
-                                        -
-                                    </button>
-                                    <span className="option-counter-number">
-                                        1
-                                    </span>
-                                    <button className="option-counter-button">
-                                        +
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        )}
                     </div>
                     <div className="header-search-items">
                         <button className="header-button">Search</button>
