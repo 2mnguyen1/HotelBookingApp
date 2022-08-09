@@ -1,0 +1,42 @@
+.featured-property {
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.featured-property-item {
+    flex: 1;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.fp-item-image{
+    width: 100%;
+    object-fit: cover;
+}
+
+.fp-name{
+    font-weight: bold;
+}
+.fp-city {
+    font-weight: 300;
+}
+
+.fp-cost {
+    font-weight: 500;
+}
+
+.fp-rating button {
+    background-color: #003580;
+    color: white;
+    border: none;
+    padding: 3px;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.fp-rating span {
+    font-size: 14px;
+}
