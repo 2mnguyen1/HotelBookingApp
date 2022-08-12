@@ -1,5 +1,6 @@
 import "./header.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faBed,
@@ -14,6 +15,7 @@ import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
 export default function Header({ type }) {
+    const [destination, setDestination] = useState("");
     const [openDate, setOpenDate] = useState(false);
     const [date, setDate] = useState([
         {
@@ -36,6 +38,12 @@ export default function Header({ type }) {
             };
         });
     };
+
+    const navigate = useNavigate();
+    const handleSearch = () => {
+        navigate("/hotels", { state: { destination, date, option } });
+    };
+
     return (
         <div className="header">
             <div
@@ -90,6 +98,9 @@ export default function Header({ type }) {
                                     type="text"
                                     placeholder="Where are you going?"
                                     className="header-search-input"
+                                    onChange={(e) =>
+                                        setDestination(e.target.value)
+                                    }
                                 ></input>
                             </div>
                             <div className="header-search-items">
@@ -269,7 +280,10 @@ export default function Header({ type }) {
                                 )}
                             </div>
                             <div className="header-search-items">
-                                <button className="header-button">
+                                <button
+                                    className="header-button"
+                                    onClick={handleSearch}
+                                >
                                     Search
                                 </button>
                             </div>
