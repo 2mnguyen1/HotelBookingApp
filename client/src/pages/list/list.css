@@ -26,3 +26,30 @@
 .list-result {
     flex: 3;
 }
+
+.list-search-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+.list-search-item > label {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.list-search-item > input {
+    height: 30px;
+    border: none;
+    padding: 5px;
+}
+
+.list-search-item > span {
+    height: 30px;
+    padding: 5px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
