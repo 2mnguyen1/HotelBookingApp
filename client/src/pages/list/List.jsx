@@ -64,52 +64,63 @@ export default function List() {
                         </div>
                         <div className="list-search-item">
                             <label>Options</label>
-                            <div className="list-search-option-item">
-                                <span className="list-search-option-text">
-                                    Min price <small> per night </small>
-                                </span>
-                                <input
-                                    type="number"
-                                    className="list-search-option-input"
-                                ></input>
-                            </div>
-                            <div className="list-search-option-item">
-                                <span className="list-search-option-text">
-                                    Max price <small> per night </small>
-                                </span>
-                                <input
-                                    type="number"
-                                    className="list-search-option-input"
-                                ></input>
-                            </div>
-                            <div className="list-search-option-item">
-                                <span className="list-search-option-text">
-                                    Adult
-                                </span>
-                                <input placeholder={option.adults}
-                                    type="number"
-                                    className="list-search-option-input"
-                                ></input>
-                            </div>
-                            <div className="list-search-option-item">
-                                <span className="list-search-option-text">
-                                    Children
-                                </span>
-                                <input placeholder={option.children}
-                                    type="number"
-                                    className="list-search-option-input"
-                                ></input>
-                            </div>
-                            <div className="list-search-option-item">
-                                <span className="list-search-option-text">
-                                    Room
-                                </span>
-                                <input placeholder={option.room}
-                                    type="number"
-                                    className="list-search-option-input"
-                                ></input>
+                            <div className="list-search-option">
+                                <div className="list-search-option-item">
+                                    <span className="list-search-option-text">
+                                        Min price <small> per night </small>
+                                    </span>
+                                    <input
+                                        type="number"
+                                        className="list-search-option-input"
+                                        min="0"
+                                    ></input>
+                                </div>
+                                <div className="list-search-option-item">
+                                    <span className="list-search-option-text">
+                                        Max price <small> per night </small>
+                                    </span>
+                                    <input
+                                        type="number"
+                                        className="list-search-option-input"
+                                        min="0"
+                                    ></input>
+                                </div>
+                                <div className="list-search-option-item">
+                                    <span className="list-search-option-text">
+                                        Adult
+                                    </span>
+                                    <input
+                                        placeholder={option.adults}
+                                        type="number"
+                                        className="list-search-option-input"
+                                        min="1"
+                                    ></input>
+                                </div>
+                                <div className="list-search-option-item">
+                                    <span className="list-search-option-text">
+                                        Children
+                                    </span>
+                                    <input
+                                        placeholder={option.children}
+                                        type="number"
+                                        className="list-search-option-input"
+                                        min="0"
+                                    ></input>
+                                </div>
+                                <div className="list-search-option-item">
+                                    <span className="list-search-option-text">
+                                        Room
+                                    </span>
+                                    <input
+                                        placeholder={option.room}
+                                        type="number"
+                                        className="list-search-option-input"
+                                        min="1"
+                                    ></input>
+                                </div>
                             </div>
                         </div>
+                        <button>Search</button>
                     </div>
                     <div className="list-result"></div>
                 </div>
