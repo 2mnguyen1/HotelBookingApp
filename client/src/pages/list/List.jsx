@@ -1,12 +1,14 @@
 import "./list.css";
 import Header from "../../components/header/Header";
 import Navbar from "../../components/navbar/Navbar";
+import SearchItems from "../../components/SearchItems/SearchItems";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
+
 export default function List() {
     const location = useLocation();
     const [destination, setDestination] = useState(location.state.destination);
@@ -122,7 +124,16 @@ export default function List() {
                         </div>
                         <button>Search</button>
                     </div>
-                    <div className="list-result"></div>
+                    <div className="list-result">
+                        <SearchItems />
+                        <SearchItems />
+                        <SearchItems />
+                        <SearchItems />
+                        <SearchItems />
+                        <SearchItems />
+                        <SearchItems />
+                        <SearchItems />
+                    </div>
                 </div>
             </div>
         </div>
