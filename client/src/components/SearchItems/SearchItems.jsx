@@ -1,4 +1,4 @@
-import React from "react";
+import "./searchItems.css";
 
 export default function SearchItems() {
     return (
@@ -23,7 +23,17 @@ export default function SearchItems() {
                     You can cancel later, so lock in this great price today!
                 </span>
             </div>
-            <div className="search-items-details">details</div>
+            <div className="search-items-details">
+                <div className="search-items-rating">
+                    <span>Exellent</span>
+                    <button>9.8</button>
+                </div>
+                <div className="search-items-details-text">
+                    <span className="search-items-price">$123</span>
+                    <span className="search-items-taxOp">Included taxes and fees</span>
+                    <button className="search-items-check-button">See availablity</button>
+                </div>
+            </div>
         </div>
     );
 }
