@@ -10,7 +10,7 @@
     max-width: 1024px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 50px;
+    margin: 50px 0;
 }
 .footer-list{
     list-style: none;
