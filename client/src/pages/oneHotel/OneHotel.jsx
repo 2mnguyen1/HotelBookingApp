@@ -3,7 +3,8 @@ import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocation, faLocationDot } from "@fortawesome/free-solid-svg-icons";
-
+import Footer from "../../components/footer/Footer";
+import MailList from "../../components/mailList/MailList";
 export default function OneHotel() {
     const photos = [
         {
@@ -31,6 +32,9 @@ export default function OneHotel() {
             <Header type="list" />
             <div className="one-hotel-container">
                 <div className="one-hotel-wrapper">
+                    <button className="btn-bookNow">
+                        Reserve or Book Now!
+                    </button>
                     <h1 className="one-hotel-title">Grand Hotel</h1>
                     <div className="one-hotel-address">
                         <FontAwesomeIcon icon={faLocationDot} />
@@ -84,6 +88,8 @@ export default function OneHotel() {
                         </div>
                     </div>
                 </div>
+                <MailList />
+                <Footer />
             </div>
         </div>
     );
