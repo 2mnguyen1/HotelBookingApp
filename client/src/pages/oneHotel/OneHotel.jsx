@@ -1,36 +1,63 @@
 import "./oneHotel.css";
+import { useState } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocation, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import {
+    faCircleXmark,
+    faLocation,
+    faLocationDot,
+    faCircleArrowLeft,
+    faCircleArrowRight,
+} from "@fortawesome/free-solid-svg-icons";
 import Footer from "../../components/footer/Footer";
 import MailList from "../../components/mailList/MailList";
 export default function OneHotel() {
+    const [slideNumber, setSlideNumber] = useState(0);
+    const [open, setOpen] = useState(false);
     const photos = [
         {
             src: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
         },
         {
-            src: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+            src: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
         },
         {
-            src: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+            src: "https://images.unsplash.com/photo-1562790351-d273a961e0e9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80",
         },
         {
-            src: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+            src: "https://images.unsplash.com/photo-1568084680786-a84f91d1153c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
         },
         {
-            src: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+            src: "https://images.unsplash.com/photo-1498503182468-3b51cbb6cb24?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
         },
         {
-            src: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+            src: "https://images.unsplash.com/photo-1586611292717-f828b167408c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
         },
     ];
+
+    const handleOpen = (index) => {
+        setSlideNumber(index);
+        setOpen(true);
+    };
     return (
         <div>
             <Navbar />
             <Header type="list" />
             <div className="one-hotel-container">
+                {open && (
+                    <div className="one-hotel-slider">
+                        <FontAwesomeIcon icon={faCircleXmark} />
+                        <FontAwesomeIcon icon={faCircleArrowLeft} />
+                        <div className="slider-wrapper">
+                            <img
+                                src={photos[slideNumber].src}
+                                className="slider-images"
+                            />
+                        </div>
+                        <FontAwesomeIcon icon={faCircleArrowRight} />
+                    </div>
+                )}
                 <div className="one-hotel-wrapper">
                     <button className="btn-bookNow">
                         Reserve or Book Now!
@@ -48,10 +75,14 @@ export default function OneHotel() {
                         airport taxi
                     </span>
                     <div className="one-hotel-images">
-                        {photos.map((photo) => (
+                        {photos.map((photo, index) => (
                             <>
                                 <div className="one-hotel-photo-wrapper">
-                                    <img src={photo.src} atl="" />
+                                    <img
+                                        onClick={() => handleOpen(index)}
+                                        src={photo.src}
+                                        atl=""
+                                    />
                                 </div>
                             </>
                         ))}
