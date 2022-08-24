@@ -48,7 +48,6 @@ export default function OneHotel() {
             newSLideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
         }
         setSlideNumber(newSLideNumber);
-
     };
     return (
         <div>
@@ -141,8 +140,12 @@ export default function OneHotel() {
                         </div>
                     </div>
                 </div>
-                <MailList />
-                <Footer />
+                {!open && (
+                    <>
+                        <MailList />
+                        <Footer />
+                    </>
+                )}
             </div>
         </div>
     );
