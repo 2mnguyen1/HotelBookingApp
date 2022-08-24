@@ -40,6 +40,16 @@ export default function OneHotel() {
         setSlideNumber(index);
         setOpen(true);
     };
+    const handleMove = (direction) => {
+        let newSLideNumber;
+        if (direction === "left") {
+            newSLideNumber = slideNumber === 0 ? 5 : slideNumber - 1;
+        } else {
+            newSLideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
+        }
+        setSlideNumber(newSLideNumber);
+
+    };
     return (
         <div>
             <Navbar />
@@ -47,15 +57,27 @@ export default function OneHotel() {
             <div className="one-hotel-container">
                 {open && (
                     <div className="one-hotel-slider">
-                        <FontAwesomeIcon icon={faCircleXmark} />
-                        <FontAwesomeIcon icon={faCircleArrowLeft} />
                         <div className="slider-wrapper">
+                            <FontAwesomeIcon
+                                icon={faCircleArrowLeft}
+                                className="arrow"
+                                onClick={() => handleMove("left")}
+                            />
+                            <FontAwesomeIcon
+                                icon={faCircleXmark}
+                                className="close"
+                                onClick={() => setOpen(false)}
+                            />
                             <img
-                                src={photos[slideNumber].src}
+                                src={photos[slideNumber]?.src}
                                 className="slider-images"
                             />
+                            <FontAwesomeIcon
+                                icon={faCircleArrowRight}
+                                className="arrow"
+                                onClick={() => handleMove("right")}
+                            />
                         </div>
-                        <FontAwesomeIcon icon={faCircleArrowRight} />
                     </div>
                 )}
                 <div className="one-hotel-wrapper">
