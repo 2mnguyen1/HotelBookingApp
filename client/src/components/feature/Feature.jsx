@@ -2,8 +2,10 @@ import "./feature.css";
 import useFetch from "../../hooks/useFetch";
 
 export default function Feature() {
-
-    const { data, loading, error} = useFetch("")
+    const { data, loading, error } = useFetch(
+        "/hotels/countByCity?cities=berlin,london,saigon"
+    );
+    console.log(data)
 
     return (
         <div className="feature-container">
