@@ -1,6 +1,10 @@
 import "./feature.css";
+import useFetch from "../../hooks/useFetch";
 
 export default function Feature() {
+
+    const { data, loading, error} = useFetch("")
+
     return (
         <div className="feature-container">
             <div className="feature-item">
