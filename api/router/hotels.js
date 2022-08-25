@@ -6,6 +6,7 @@ import {
     getHotel,
     getAllHotels,
     countbyCity,
+    countByType,
 } from "../controllers/hotel.js";
 import { verifyAdmin } from "../utils/verifyToken.js";
 const router = express.Router();
@@ -22,6 +23,6 @@ router.get("/find/:id", getHotel);
 // GET ALL
 router.get("/", getAllHotels);
 router.get("/countByCity", countbyCity);
-router.get("/countByType", getAllHotels);
+router.get("/countByType", countByType);
 
 export default router;
