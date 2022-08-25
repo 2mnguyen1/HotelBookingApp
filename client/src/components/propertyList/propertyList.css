@@ -18,6 +18,7 @@
 }
 .property-list-title > h1 {
     font-size: 18px;
+    text-transform: capitalize;
 }
 
 .property-list-title > h2 {
