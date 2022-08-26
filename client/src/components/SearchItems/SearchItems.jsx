@@ -1,22 +1,20 @@
 import "./searchItems.css";
-
-export default function SearchItems() {
+import { Link } from "react-router-dom";
+export default function SearchItems({ item }) {
     return (
         <div className="search-items">
-            <img
-                src="https://images.unsplash.com/photo-1517840901100-8179e982acb7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                alt=""
-                className="search-items-image"
-            />
+            <img src={item.photos[0]} alt="" className="search-items-image" />
             <div className="search-items-desc">
-                <h1 className="search-items-title">Tower Street Apartments</h1>
-                <span className="search-items-distance">500m from center</span>
+                <h1 className="search-items-title">{item.name}</h1>
+                <span className="search-items-distance">
+                    {item.distance}m from center
+                </span>
                 <span className="search-items-taxiOp">Free airport taxi</span>
                 <span className="search-items-subtitle">
                     Studio Apartment with Air conditioning
                 </span>
                 <span className="search-items-features">
-                    Entire Studio * 1 bathroom * 21m^2 1 full bed
+                    {item.description}
                 </span>
                 <span className="search-items-cancelOp">Free cancellation</span>
                 <span className="search-items-cancelOp-subtitle">
@@ -24,14 +22,24 @@ export default function SearchItems() {
                 </span>
             </div>
             <div className="search-items-details">
-                <div className="search-items-rating">
-                    <span>Exellent</span>
-                    <button>9.8</button>
-                </div>
+                {item.rating && (
+                    <div className="search-items-rating">
+                        <span>Exellent</span>
+                        <button>{item.rating}</button>
+                    </div>
+                )}
                 <div className="search-items-details-text">
-                    <span className="search-items-price">$123</span>
-                    <span className="search-items-taxOp">Included taxes and fees</span>
-                    <button className="search-items-check-button">See availablity</button>
+                    <span className="search-items-price">
+                        ${item.cheapestPrice}
+                    </span>
+                    <span className="search-items-taxOp">
+                        Included taxes and fees
+                    </span>
+                    <Link to={`/hotels/${item._id}`}>
+                        <button className="search-items-check-button">
+                            See availablity
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>

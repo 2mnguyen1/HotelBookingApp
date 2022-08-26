@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
+import useFetch from "../../hooks/useFetch";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 
@@ -15,6 +16,10 @@ export default function List() {
     const [date, setDate] = useState(location.state.date);
     const [option, setOption] = useState(location.state.option);
     const [openDate, setOpenDate] = useState(false);
+
+    const { data, loading, error, refetch } = useFetch(
+        `/hotels?city=${destination}`
+    );
 
     return (
         <div>
@@ -75,7 +80,7 @@ export default function List() {
                                         type="number"
                                         className="list-search-option-input"
                                         min="0"
-                                    ></input>
+                                    />
                                 </div>
                                 <div className="list-search-option-item">
                                     <span className="list-search-option-text">
@@ -125,14 +130,15 @@ export default function List() {
                         <button>Search</button>
                     </div>
                     <div className="list-result">
-                        <SearchItems />
-                        <SearchItems />
-                        <SearchItems />
-                        <SearchItems />
-                        <SearchItems />
-                        <SearchItems />
-                        <SearchItems />
-                        <SearchItems />
+                        {loading ? (
+                            "loading"
+                        ) : (
+                            <>
+                                {data.map((item) => (
+                                    <SearchItems key={item._id} item={item} />
+                                ))}
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

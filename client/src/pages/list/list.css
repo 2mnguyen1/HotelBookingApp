@@ -1,3 +1,14 @@
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+    margin: 0;
+}
+
 .list-container {
     display: flex;
     justify-content: center;
@@ -45,6 +56,9 @@
     border: none;
     padding: 5px;
 }
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
 
 .list-search-item > span {
     height: 30px;
@@ -84,3 +98,4 @@
     font-weight: 600;
     border-radius: 7px;
 }
+
