@@ -16,11 +16,16 @@ export default function List() {
     const [date, setDate] = useState(location.state.date);
     const [option, setOption] = useState(location.state.option);
     const [openDate, setOpenDate] = useState(false);
+    const [min, setMin] = useState(undefined);
+    const [max, setMax] = useState(undefined);
 
-    const { data, loading, error, refetch } = useFetch(
-        `/hotels?city=${destination}`
+    const { data, loading, error, reFetch } = useFetch(
+        `/hotels?city=${destination}&min=${min || 0}&max=${max || 999}`
     );
 
+    const handleSearch = () => {
+        reFetch();
+    };
     return (
         <div>
             <Navbar />
@@ -40,6 +45,7 @@ export default function List() {
                                 placeholder={destination}
                                 id="list-search-input"
                                 type="text"
+                                // onChange={(e) => setDestination}
                             ></input>
                         </div>
                         <div className="list-search-item">
@@ -80,6 +86,7 @@ export default function List() {
                                         type="number"
                                         className="list-search-option-input"
                                         min="0"
+                                        onChange={(e) => setMin(e.target.value)}
                                     />
                                 </div>
                                 <div className="list-search-option-item">
@@ -90,6 +97,7 @@ export default function List() {
                                         type="number"
                                         className="list-search-option-input"
                                         min="0"
+                                        onChange={(e) => setMax(e.target.value)}
                                     ></input>
                                 </div>
                                 <div className="list-search-option-item">
@@ -127,7 +135,7 @@ export default function List() {
                                 </div>
                             </div>
                         </div>
-                        <button>Search</button>
+                        <button onClick={handleSearch}>Search</button>
                     </div>
                     <div className="list-result">
                         {loading ? (
