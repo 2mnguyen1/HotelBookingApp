@@ -1,7 +1,7 @@
 import { createContext, useReducer, useEffect } from "react";
 
 const INITIAL_STATE = {
-    user: JSON.parse(localStorage.getItem("user")) || nullg,
+    user: JSON.parse(localStorage.getItem("user")) || null,
     loading: false,
     error: null,
 };
@@ -26,7 +26,7 @@ const AuthReducer = (state, action) => {
             return {
                 user: null,
                 loading: false,
-                error: state.payload,
+                error: action.payload,
             };
         case "LOGOUT":
             return INITIAL_STATE;
