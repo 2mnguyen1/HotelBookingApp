@@ -1,5 +1,5 @@
 import "./oneHotel.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
@@ -14,6 +14,7 @@ import {
 import Footer from "../../components/footer/Footer";
 import MailList from "../../components/mailList/MailList";
 import useFetch from "../../hooks/useFetch";
+import { SearchContext } from "../../context/SearchContext";
 export default function OneHotel() {
     const [slideNumber, setSlideNumber] = useState(0);
     const [open, setOpen] = useState(false);
@@ -21,6 +22,9 @@ export default function OneHotel() {
     const id = location.pathname.split("/")[2];
 
     const { data, loading, error } = useFetch(`/hotels/find/${id}`);
+
+    const { dates } = useContext(SearchContext);
+    console.log(dates)
 
     const photos = [
         {

@@ -13,7 +13,7 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 export default function List() {
     const location = useLocation();
     const [destination, setDestination] = useState(location.state.destination);
-    const [date, setDate] = useState(location.state.date);
+    const [dates, setDates] = useState(location.state.dates);
     const [option, setOption] = useState(location.state.option);
     const [openDate, setOpenDate] = useState(false);
     const [min, setMin] = useState(undefined);
@@ -59,18 +59,18 @@ export default function List() {
                             <span
                                 onClick={() => setOpenDate((prev) => !prev)}
                             >{` ${format(
-                                date[0].startDate,
+                                dates[0].startDate,
                                 "MM/dd/yyyy"
                             )} to ${format(
-                                date[0].endDate,
+                                dates[0].endDate,
                                 "MM/dd/yyyy"
                             )}`}</span>
                             {openDate && (
                                 <DateRange
                                     onChange={(item) =>
-                                        setDate([item.selection])
+                                        setDates([item.selection])
                                     }
-                                    ranges={date}
+                                    ranges={dates}
                                     minDate={new Date()}
                                 />
                             )}

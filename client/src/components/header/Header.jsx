@@ -18,7 +18,7 @@ import { SearchContext } from "../../context/SearchContext";
 export default function Header({ type }) {
     const [destination, setDestination] = useState("");
     const [openDate, setOpenDate] = useState(false);
-    const [date, setDate] = useState([
+    const [dates, setDates] = useState([
         {
             startDate: new Date(),
             endDate: new Date(),
@@ -40,15 +40,15 @@ export default function Header({ type }) {
         });
     };
 
-    const { dispatch } = useContext(SearchContext);
+    const { dispatch } = useContext(SearchContext); // pass dispatch to any page that get information
 
     const navigate = useNavigate();
     const handleSearch = () => {
         dispatch({
             type: "NEW_SEARCH",
-            payload: { destination, date, option },
+            payload: { destination, dates, option },
         }); // when ever we search, it will dispatch type of NEW_SEARCH, and we have to send payload to Initial State
-        navigate("/hotels", { state: { destination, date, option } });
+        navigate("/hotels", { state: { destination, dates, option } });
     };
 
     return (
@@ -120,18 +120,18 @@ export default function Header({ type }) {
                                     className="header-search-text"
                                     onClick={() => setOpenDate((prev) => !prev)}
                                 >
-                                    {format(date[0].startDate, "MM/dd/yyyy") +
+                                    {format(dates[0].startDate, "MM/dd/yyyy") +
                                         " to " +
-                                        format(date[0].endDate, "MM/dd/yyyy")}
+                                        format(dates[0].endDate, "MM/dd/yyyy")}
                                 </span>
                                 {openDate && (
                                     <DateRange
                                         editableDateInputs={true}
                                         onChange={(item) =>
-                                            setDate([item.selection])
+                                            setDates([item.selection])
                                         }
                                         moveRangeOnFirstSelection={false}
-                                        ranges={date}
+                                        ranges={dates}
                                         className="date"
                                         minDate={new Date()}
                                     />
