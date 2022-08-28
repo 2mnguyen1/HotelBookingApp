@@ -1,5 +1,5 @@
 import "./header.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -14,6 +14,7 @@ import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
+import { SearchContext } from "../../context/SearchContext";
 export default function Header({ type }) {
     const [destination, setDestination] = useState("");
     const [openDate, setOpenDate] = useState(false);
@@ -39,8 +40,14 @@ export default function Header({ type }) {
         });
     };
 
+    const { dispatch } = useContext(SearchContext);
+
     const navigate = useNavigate();
     const handleSearch = () => {
+        dispatch({
+            type: "NEW_SEARCH",
+            payload: { destination, date, option },
+        }); // when ever we search, it will dispatch type of NEW_SEARCH, and we have to send payload to Initial State
         navigate("/hotels", { state: { destination, date, option } });
     };
 
