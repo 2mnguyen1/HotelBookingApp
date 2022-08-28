@@ -14,7 +14,7 @@ export default function List() {
     const location = useLocation();
     const [destination, setDestination] = useState(location.state.destination);
     const [dates, setDates] = useState(location.state.dates);
-    const [option, setOption] = useState(location.state.option);
+    const [options, setOptions] = useState(location.state.options);
     const [openDate, setOpenDate] = useState(false);
     const [min, setMin] = useState(undefined);
     const [max, setMax] = useState(undefined);
@@ -105,7 +105,7 @@ export default function List() {
                                         Adult
                                     </span>
                                     <input
-                                        placeholder={option.adults}
+                                        placeholder={options.adults}
                                         type="number"
                                         className="list-search-option-input"
                                         min="1"
@@ -116,7 +116,7 @@ export default function List() {
                                         Children
                                     </span>
                                     <input
-                                        placeholder={option.children}
+                                        placeholder={options.children}
                                         type="number"
                                         className="list-search-option-input"
                                         min="0"
@@ -127,7 +127,7 @@ export default function List() {
                                         Room
                                     </span>
                                     <input
-                                        placeholder={option.room}
+                                        placeholder={options.room}
                                         type="number"
                                         className="list-search-option-input"
                                         min="1"

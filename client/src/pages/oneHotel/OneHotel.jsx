@@ -23,11 +23,11 @@ export default function OneHotel() {
 
     const { data, loading, error } = useFetch(`/hotels/find/${id}`);
 
-    const { dates } = useContext(SearchContext);
+    const { dates, options } = useContext(SearchContext);
 
     const daysDifference = () => {
         const timeDiff =
-            dates[0].endDate.getTime() - dates[0].startDate.getTime();
+            dates[0]?.endDate.getTime() - dates[0]?.startDate.getTime();
         const daysDiff = timeDiff / (1000 * 60 * 60 * 24);
         return daysDiff;
     };
@@ -150,9 +150,9 @@ export default function OneHotel() {
                                 )}
                                 <h2>
                                     <b>
-                                        ${data.cheapestPrice * daysDifference()}
+                                        ${data.cheapestPrice * daysDifference() * options.room}
                                     </b>{" "}
-                                    ({daysDifference()} nights)
+                                    ({daysDifference()}-night)
                                 </h2>
                                 <button>Reverse or Book Now!</button>
                             </div>

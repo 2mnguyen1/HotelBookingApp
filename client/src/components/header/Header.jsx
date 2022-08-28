@@ -26,16 +26,16 @@ export default function Header({ type }) {
         },
     ]);
     const [openOption, setOpenOption] = useState(false);
-    const [option, setOption] = useState({
+    const [options, setOptions] = useState({
         adults: 0,
         children: 0,
         room: 0,
     });
     const handleOption = (name, operation) => {
-        setOption((prev) => {
+        setOptions((prev) => {
             return {
                 ...prev,
-                [name]: operation === "+" ? option[name] + 1 : option[name] - 1,
+                [name]: operation === "+" ? options[name] + 1 : options[name] - 1,
             };
         });
     };
@@ -46,9 +46,9 @@ export default function Header({ type }) {
     const handleSearch = () => {
         dispatch({
             type: "NEW_SEARCH",
-            payload: { destination, dates, option },
+            payload: { destination, dates, options },
         }); // when ever we search, it will dispatch type of NEW_SEARCH, and we have to send payload to Initial State
-        navigate("/hotels", { state: { destination, dates, option } });
+        navigate("/hotels", { state: { destination, dates, options } });
     };
 
     return (
@@ -151,7 +151,7 @@ export default function Header({ type }) {
                                         setOpenOption((prev) => !prev)
                                     }
                                 >
-                                    {`${option.adults} adult ${option.children} children ${option.room} room`}
+                                    {`${options.adults} adult ${options.children} children ${options.room} room`}
                                 </span>
                                 {openOption && (
                                     <div className="options">
@@ -162,13 +162,13 @@ export default function Header({ type }) {
                                             <div className="option-counter">
                                                 <button
                                                     disabled={
-                                                        option.adults <= 0
+                                                        options.adults <= 0
                                                             ? true
                                                             : false
                                                     }
                                                     style={{
                                                         backgroundColor:
-                                                            option.adults <= 0
+                                                            options.adults <= 0
                                                                 ? "lightgrey"
                                                                 : "",
                                                     }}
@@ -183,7 +183,7 @@ export default function Header({ type }) {
                                                     -
                                                 </button>
                                                 <span className="option-counter-number">
-                                                    {option.adults}
+                                                    {options.adults}
                                                 </span>
                                                 <button
                                                     className="option-counter-button"
@@ -205,13 +205,13 @@ export default function Header({ type }) {
                                             <div className="option-counter">
                                                 <button
                                                     disabled={
-                                                        option.children <= 0
+                                                        options.children <= 0
                                                             ? true
                                                             : false
                                                     }
                                                     style={{
                                                         backgroundColor:
-                                                            option.children <= 0
+                                                            options.children <= 0
                                                                 ? "lightgrey"
                                                                 : "",
                                                     }}
@@ -226,7 +226,7 @@ export default function Header({ type }) {
                                                     -
                                                 </button>
                                                 <span className="option-counter-number">
-                                                    {option.children}
+                                                    {options.children}
                                                 </span>
                                                 <button
                                                     className="option-counter-button"
@@ -248,13 +248,13 @@ export default function Header({ type }) {
                                             <div className="option-counter">
                                                 <button
                                                     disabled={
-                                                        option.room <= 0
+                                                        options.room <= 0
                                                             ? true
                                                             : false
                                                     }
                                                     style={{
                                                         backgroundColor:
-                                                            option.room <= 0
+                                                            options.room <= 0
                                                                 ? "lightgrey"
                                                                 : "",
                                                     }}
@@ -269,7 +269,7 @@ export default function Header({ type }) {
                                                     -
                                                 </button>
                                                 <span className="option-counter-number">
-                                                    {option.room}
+                                                    {options.room}
                                                 </span>
                                                 <button
                                                     className="option-counter-button"
