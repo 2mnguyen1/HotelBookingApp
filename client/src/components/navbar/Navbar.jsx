@@ -4,7 +4,12 @@ import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
 
 export default function Navbar() {
-    const { user } = useContext(AuthContext);
+    const { user, loading, dispatch } = useContext(AuthContext);
+    const handleSignOut = (event) => {
+        event.preventDefault();
+        dispatch({ type: "LOGOUT" });
+    };
+    console.log(user);
     return (
         <div className="navbar">
             <div className="navbar-container">
@@ -15,11 +20,22 @@ export default function Navbar() {
                     <span className="logo">minhbooking</span>
                 </Link>
                 {user ? (
-                    user.username
+                    <div>
+                        <span className="nav-username">{user.username}</span>
+                        <button
+                            className="nav-button"
+                            disabled={loading}
+                            onClick={handleSignOut}
+                        >
+                            Logout
+                        </button>
+                    </div>
                 ) : (
                     <div className="nav-items">
                         <button className="nav-button">Register</button>
-                        <button className="nav-button">Login</button>
+                        <Link to="/login">
+                            <button className="nav-button">Login</button>
+                        </Link>
                     </div>
                 )}
             </div>
