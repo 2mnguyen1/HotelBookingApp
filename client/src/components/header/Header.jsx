@@ -15,6 +15,7 @@ import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
 import { SearchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
 export default function Header({ type }) {
     const [destination, setDestination] = useState("");
     const [openDate, setOpenDate] = useState(false);
@@ -40,6 +41,7 @@ export default function Header({ type }) {
         });
     };
 
+    const { user } = useContext(AuthContext);
     const { dispatch } = useContext(SearchContext); // pass dispatch to any page that get information
 
     const navigate = useNavigate();
@@ -92,9 +94,11 @@ export default function Header({ type }) {
                             savings of 10% or more with a free Minhbooking
                             account
                         </p>
-                        <button className="header-button">
-                            Sign in / Register
-                        </button>
+                        {!user && (
+                            <button className="header-button">
+                                Sign in / Register
+                            </button>
+                        )}
                         <div className="header-search">
                             <div className="header-search-items">
                                 <FontAwesomeIcon
@@ -211,7 +215,8 @@ export default function Header({ type }) {
                                                     }
                                                     style={{
                                                         backgroundColor:
-                                                            options.children <= 0
+                                                            options.children <=
+                                                            0
                                                                 ? "lightgrey"
                                                                 : "",
                                                     }}

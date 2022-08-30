@@ -9,7 +9,7 @@ export default function Login() {
         username: undefined,
         password: undefined,
     });
-    const { user, loading, error, dispatch } = useContext(AuthContext);
+    const { loading, error, dispatch } = useContext(AuthContext);
     const handleChange = (e) => {
         setCredentials((prev) => ({
             ...prev,
