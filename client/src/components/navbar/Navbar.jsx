@@ -9,7 +9,6 @@ export default function Navbar() {
         event.preventDefault();
         dispatch({ type: "LOGOUT" });
     };
-    console.log(user);
     return (
         <div className="navbar">
             <div className="navbar-container">

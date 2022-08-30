@@ -1,6 +1,6 @@
 import "./oneHotel.css";
 import { useState, useContext } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,23 +13,29 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Footer from "../../components/footer/Footer";
 import MailList from "../../components/mailList/MailList";
+import Reverse from "../../components/reserve/Reserve";
 import useFetch from "../../hooks/useFetch";
 import { SearchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
+
 export default function OneHotel() {
     const [slideNumber, setSlideNumber] = useState(0);
     const [open, setOpen] = useState(false);
+    const [openReserve, setOpenReserve] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
     const id = location.pathname.split("/")[2];
 
     const { data, loading, error } = useFetch(`/hotels/find/${id}`);
 
+    const { user } = useContext(AuthContext);
     const { dates, options } = useContext(SearchContext);
 
     const daysDifference = () => {
         const timeDiff =
             dates[0]?.endDate.getTime() - dates[0]?.startDate.getTime();
         const daysDiff = timeDiff / (1000 * 60 * 60 * 24);
-        return daysDiff;
+        return daysDiff ? daysDiff : 1;
     };
 
     const photos = [
@@ -66,6 +72,10 @@ export default function OneHotel() {
         }
         setSlideNumber(newSLideNumber);
     };
+    const handleReserve = () => {
+        !user && navigate("/login");
+        setOpenReserve(true);
+    };
     return (
         <div>
             <Navbar />
@@ -100,7 +110,7 @@ export default function OneHotel() {
                         </div>
                     )}
                     <div className="one-hotel-wrapper">
-                        <button className="btn-bookNow">
+                        <button onClick={handleReserve} className="btn-bookNow">
                             Reserve or Book Now!
                         </button>
                         <h1 className="one-hotel-title">{data.name}</h1>
@@ -116,18 +126,23 @@ export default function OneHotel() {
                             property and get free airport taxi
                         </span>
                         <div className="one-hotel-images">
-                            {data.photos?.map((photo, index) => (
-                                <div
-                                    className="one-hotel-photo-wrapper"
-                                    key={index}
-                                >
-                                    <img
-                                        onClick={() => handleOpen(index)}
-                                        src={photo}
-                                        atl=""
-                                    />
-                                </div>
-                            ))}
+                            {photos?.map(
+                                (
+                                    photo,
+                                    index // change to data after uploading photo
+                                ) => (
+                                    <div
+                                        className="one-hotel-photo-wrapper"
+                                        key={index}
+                                    >
+                                        <img
+                                            onClick={() => handleOpen(index)}
+                                            src={photo.src}
+                                            atl=""
+                                        />
+                                    </div>
+                                )
+                            )}
                         </div>
                         <div className="one-hotel-details">
                             <div className="one-hotel-details-text">
@@ -139,7 +154,9 @@ export default function OneHotel() {
                                 </p>
                             </div>
                             <div className="one-hotel-details-price">
-                                <h1>Perfect for a 9-night stay</h1>
+                                <h1>
+                                    Perfect for a {daysDifference()}-night stay
+                                </h1>
                                 {data.rating && (
                                     <span>
                                         Location in the real heart of Krakow,
@@ -150,7 +167,12 @@ export default function OneHotel() {
                                 )}
                                 <h2>
                                     <b>
-                                        ${data.cheapestPrice * daysDifference() * options.room}
+                                        $
+                                        {data.cheapestPrice *
+                                        daysDifference() *
+                                        options.room
+                                            ? options.room
+                                            : 1}
                                     </b>{" "}
                                     ({daysDifference()}-night)
                                 </h2>
@@ -165,6 +187,9 @@ export default function OneHotel() {
                         </>
                     )}
                 </div>
+            )}
+            {openReserve && (
+                <Reverse setOpenReserve={setOpenReserve} hotelId={id} />
             )}
         </div>
     );
