@@ -45,7 +45,7 @@ export default function Login() {
                     id="password"
                     onChange={handleChange}
                 />
-                <button onClick={handleClick} className="login-btn">
+                <button disabled={loading} onClick={handleClick} className="login-btn">
                     Login
                 </button>
                 {error && <span>{error.message}</span>}
