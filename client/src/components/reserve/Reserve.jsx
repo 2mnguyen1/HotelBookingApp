@@ -26,11 +26,11 @@ export default function Reserve({ setOpenReserve, hotelId }) {
         return list;
     };
 
+    const allDates = getDatesInRange(dates[0]?.startDate, dates[0]?.endDate);
+    console.log(allDates);
     const isAvailable = (roomNumber) => {
         const isFound = roomNumber.unavaliableDates.some((date) => {
-            getDatesInRange(dates[0].startDate, dates[0].endDate).includes(
-                new Date(date).getTime()
-            );
+            return allDates.includes(new Date(date).getTime());
         });
 
         return !isFound;
@@ -49,10 +49,15 @@ export default function Reserve({ setOpenReserve, hotelId }) {
         try {
             await Promise.all(
                 selectedRoom.map((roomId) => {
-                    const res = axios.put("");
+                    const res = axios.put(`/rooms/availability/${roomId}`, {
+                        dates: allDates,
+                    });
+                    return res.data;
                 })
             );
-        } catch (err) {}
+        } catch (err) {
+            console.log(err);
+        }
     };
     return (
         <div className="reserve">
