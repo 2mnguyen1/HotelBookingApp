@@ -8,7 +8,15 @@ export default function Reserve({ setOpenReserve, hotelId }) {
     const [selectedRoom, setSelectedRoom] = useState([]);
     const { data, loading, error } = useFetch(`/hotels/room/${hotelId}`);
 
-    
+    const handleSelect = (e) => {
+        const checked = e.target.checked;
+        const value = e.target.value;
+        setSelectedRoom(
+            checked
+                ? [...selectedRoom, value]
+                : selectedRoom.filter((item) => item !== value) // when unchecked filter any value === item
+        );
+    };
     return (
         <div className="reserve">
             <div className="reserve-container">
