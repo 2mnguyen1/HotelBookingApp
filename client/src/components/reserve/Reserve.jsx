@@ -26,7 +26,7 @@ export default function Reserve({ setOpenReserve, hotelId }) {
     };
 
     const isAvailable = (roomNumber) => {
-        const isFound = roomNumber.unavailableDates.some((date) => {
+        const isFound = roomNumber.unavaliableDates.some((date) => {
             getDatesInRange().includes(new Date(date).getTime());
         });
 
