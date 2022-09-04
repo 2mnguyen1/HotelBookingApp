@@ -25,7 +25,13 @@ export default function Reserve({ setOpenReserve, hotelId }) {
         return list;
     };
 
-    console.log(getDatesInRange(dates[0].startDate, dates[0].endDate));
+    const isAvailable = (roomNumber) => {
+        const isFound = roomNumber.unavailableDates.some((date) => {
+            getDatesInRange().includes(new Date(date).getTime());
+        });
+
+        return !isFound;
+    };
 
     const handleSelect = (e) => {
         const checked = e.target.checked;
@@ -67,6 +73,7 @@ export default function Reserve({ setOpenReserve, hotelId }) {
                                     type="checkbox"
                                     value={roomNumber._id}
                                     onChange={handleSelect}
+                                    disabled={!isAvailable(roomNumber)}
                                 ></input>
                             </div>
                         ))}
