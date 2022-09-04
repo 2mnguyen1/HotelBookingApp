@@ -110,7 +110,7 @@ export default function OneHotel() {
                         </div>
                     )}
                     <div className="one-hotel-wrapper">
-                        <button onClick={handleReserve} className="btn-bookNow">
+                        <button onClick={handleReserve} className="btn-book-now">
                             Reserve or Book Now!
                         </button>
                         <h1 className="one-hotel-title">{data.name}</h1>

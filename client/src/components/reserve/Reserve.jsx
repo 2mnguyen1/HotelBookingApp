@@ -2,8 +2,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../../hooks/useFetch";
 import { SearchContext } from "../../context/SearchContext";
-
 import { useState, useContext } from "react";
+import axios from "axios";
+import "./reserve.css";
 
 export default function Reserve({ setOpenReserve, hotelId }) {
     const [selectedRoom, setSelectedRoom] = useState([]);
@@ -44,7 +45,15 @@ export default function Reserve({ setOpenReserve, hotelId }) {
                 : selectedRoom.filter((item) => item !== value) // when unchecked filter any value === item
         );
     };
-    const handleReserve = () => {};
+    const handleReserve = async () => {
+        try {
+            await Promise.all(
+                selectedRoom.map((roomId) => {
+                    const res = axios.put("");
+                })
+            );
+        } catch (err) {}
+    };
     return (
         <div className="reserve">
             <div className="reserve-container">
@@ -55,7 +64,7 @@ export default function Reserve({ setOpenReserve, hotelId }) {
                 />
                 <span>Select you rooms: </span>
                 {data.map((item) => (
-                    <div className="reserve-item">
+                    <div className="reserve-item" key={item._id}>
                         <div className="reserve-item-info">
                             <div className="reserve-item-title">
                                 {item.title}
@@ -66,19 +75,21 @@ export default function Reserve({ setOpenReserve, hotelId }) {
                             <div className="reserve-max">
                                 Max people: <b>{item.maxPeople}</b>
                             </div>
-                            <div className="reserve-price">{item.price}</div>
+                            <div className="reserve-price">${item.price}</div>
                         </div>
-                        {item.roomNumbers.map((roomNumber) => (
-                            <div className="room">
-                                <label>{roomNumber.number}</label>
-                                <input
-                                    type="checkbox"
-                                    value={roomNumber._id}
-                                    onChange={handleSelect}
-                                    disabled={!isAvailable(roomNumber)}
-                                ></input>
-                            </div>
-                        ))}
+                        <div className="reserve-select-room">
+                            {item.roomNumbers.map((roomNumber) => (
+                                <div className="room" key={roomNumber._id}>
+                                    <label>{roomNumber.number}</label>
+                                    <input
+                                        type="checkbox"
+                                        value={roomNumber._id}
+                                        onChange={handleSelect}
+                                        disabled={!isAvailable(roomNumber)}
+                                    ></input>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 ))}
                 <button className="reserve-button" onClick={handleReserve}>
