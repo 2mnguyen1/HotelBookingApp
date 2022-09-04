@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../../hooks/useFetch";
 import { SearchContext } from "../../context/SearchContext";
+import { useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import axios from "axios";
 import "./reserve.css";
@@ -26,8 +27,9 @@ export default function Reserve({ setOpenReserve, hotelId }) {
         return list;
     };
 
+    const navigate = useNavigate();
+
     const allDates = getDatesInRange(dates[0]?.startDate, dates[0]?.endDate);
-    console.log(allDates);
     const isAvailable = (roomNumber) => {
         const isFound = roomNumber.unavaliableDates.some((date) => {
             return allDates.includes(new Date(date).getTime());
@@ -55,6 +57,8 @@ export default function Reserve({ setOpenReserve, hotelId }) {
                     return res.data;
                 })
             );
+            setOpenReserve(false);
+            navigate("/");
         } catch (err) {
             console.log(err);
         }
